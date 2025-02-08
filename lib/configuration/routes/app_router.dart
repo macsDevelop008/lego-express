@@ -1,3 +1,13 @@
 import 'package:go_router/go_router.dart';
+import 'package:logo_express/presentation/presentation.dart';
 
-final appRouter = GoRouter(initialLocation: '/', routes: []);
+/// Router de la aplicación.
+final appRouter = GoRouter(
+    // ruta inicial.
+    initialLocation: '/',
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const InitialScreen(),
+      ),
+    ]);
