@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:logo_express/presentation/presentation.dart';
+import 'package:lego_express/presentation/presentation.dart';
 
 /// Vista de los Inputs y botones del formulario de inicio de sesión.
-class LogInFormButtonsView extends StatelessWidget {
+class LogInFormButtonsView extends StatefulWidget {
   const LogInFormButtonsView({
     super.key,
     required this.height,
@@ -18,37 +18,145 @@ class LogInFormButtonsView extends StatelessWidget {
   final ThemeData appTheme;
 
   @override
+  State<LogInFormButtonsView> createState() => _LogInFormButtonsViewState();
+}
+
+class _LogInFormButtonsViewState extends State<LogInFormButtonsView> {
+  // Controlador para el ingreso del usuario.
+  late final TextEditingController userController;
+  // Controlador para el ingreso de la contraseña.
+  late final TextEditingController passwordController;
+
+  @override
+  void initState() {
+    userController = TextEditingController();
+    passwordController = TextEditingController();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return
         // Base o Background.
         Container(
       alignment: Alignment.center,
-      height: height,
-      width: width,
+      height: widget.height,
+      width: widget.width,
       decoration: BoxDecoration(
-          color: appTheme.primaryColor.withValues(alpha: 0.7),
+          color: widget.appTheme.primaryColor.withValues(alpha: 0.7),
           borderRadius: _borderRadius()),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          //
-          GlobalTextFieldWidget(
-            width: width * 0.85,
-            height: height * 0.2,
-            // Color basado en el color del backgroun del botón.
-            backgroundColor: appTheme
-                .elevatedButtonTheme.style!.backgroundColor!
-                .resolve(<WidgetState>{})!.withValues(alpha: 0.13),
-            borderRadiusValue: width * 0.04,
+          // Espacio
+          SizedBox(
+            height: widget.height * 0.07,
           ),
+          // Titulo - Usuario
+          LogInFormTitleTextWidget(
+            text: 'Usuario',
+            textSize: widget.height * 0.045,
+            paddinfLeft: widget.height * 0.14,
+            color: widget.appTheme.textTheme.bodyMedium!.color!
+                .withValues(alpha: 0.5),
+          ),
+          // TextField para el ingreso del usuario.
+          GlobalTextFieldWidget(
+            width: widget.width * 0.8,
+            height: widget.height * 0.11,
+            backgroundColor: _backgroundColorTextField(),
+            borderRadiusValue: widget.width * 0.04,
+            controller: userController,
+            hintText: 'Ingresa tu Usuario',
+            isObscureText: false,
+          ),
+          // Espacio
+          SizedBox(
+            height: widget.height * 0.07,
+          ),
+          // Titulo - Contraseña
+          LogInFormTitleTextWidget(
+            text: 'Contraseña',
+            textSize: widget.height * 0.045,
+            paddinfLeft: widget.height * 0.14,
+            color: widget.appTheme.textTheme.bodyMedium!.color!
+                .withValues(alpha: 0.5),
+          ),
+          // TextField para el ingreso de la contraseña.
+          GlobalTextFieldWidget(
+            width: widget.width * 0.8,
+            height: widget.height * 0.11,
+            backgroundColor: _backgroundColorTextField(),
+            borderRadiusValue: widget.width * 0.04,
+            controller: passwordController,
+            hintText: 'Ingresa tu contraseña',
+            isObscureText: true,
+            icon: Icons.lock,
+          ),
+          // Espacio
+          SizedBox(
+            height: widget.height * 0.05,
+          ),
+          // Botóno inicio de sesión
+          GlobalButtonTextWidget(
+            text: 'Iniciar Sesión',
+            sizeText: widget.height * 0.05,
+            width: widget.width * 0.7,
+            height: widget.height * 0.11,
+            roundedBorders: widget.height * 0.03,
+            event: () {
+              print('hola');
+            },
+          ),
+          // Espacio
+          SizedBox(
+            height: widget.height * 0.05,
+          ),
+          // Botones de inicio de sesión social.
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: widget.width * 0.06,
+            children: [
+              _buttonLogInSocial(() {}, 'assets/images/icon_google.png'),
+              _buttonLogInSocial(() {}, 'assets/images/icon_apple.png'),
+              _buttonLogInSocial(() {}, 'assets/images/icon_facebook.png'),
+            ],
+          )
+          // Inicio Sesión apple
         ],
       ),
     );
+  }
+
+  GlobalButtonImageWidget _buttonLogInSocial(
+      VoidCallback event, String routeImage) {
+    return GlobalButtonImageWidget(
+      width: widget.width * 0.15,
+      height: widget.width * 0.15,
+      roundedBorders: widget.width * 0.05,
+      image: Transform.scale(
+        scale: 2,
+        child: Image.asset(
+          routeImage,
+        ),
+      ),
+      color: _backgroundColorTextField().withValues(alpha: 0.06),
+      event: event,
+    );
+  }
+
+  /// Obtiene el color para el TextField.
+  ///
+  /// @return El color base o de fondo del ElevationButton según el Theme.
+  Color _backgroundColorTextField() {
+    return widget.appTheme.elevatedButtonTheme.style!.backgroundColor!
+        .resolve(<WidgetState>{})!.withValues(alpha: 0.13);
   }
 
   /// Calcula el borde redondeado de la base o Background.
   ///
   /// @return El BorderRadius para aplicaar
   BorderRadius _borderRadius() =>
-      BorderRadius.vertical(top: Radius.circular(width * 0.13));
+      BorderRadius.vertical(top: Radius.circular(widget.width * 0.13));
 }

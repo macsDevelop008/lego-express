@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:logo_express/presentation/presentation.dart';
+import 'package:lego_express/presentation/presentation.dart';
 
 /// Router de la aplicación.
 final appRouter = GoRouter(

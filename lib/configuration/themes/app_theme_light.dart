@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:logo_express/configuration/configuration.dart';
+import 'package:lego_express/configuration/configuration.dart';
 
 /// Tema claro de la aplicación.
 final appThemeLight = ThemeData.light().copyWith(
     primaryColor: AppColors.firstLight,
     textTheme: _texTheme,
-    elevatedButtonTheme: _elevationButton);
+    elevatedButtonTheme: _elevationButton,
+    inputDecorationTheme: _textField);
 
 // Tema del texto - light.
 final _texTheme = TextTheme(
@@ -18,6 +19,24 @@ final _elevationButton = ElevatedButtonThemeData(
     backgroundColor: AppColors.secondLight, // Se define el color del fondo.
     foregroundColor: AppColors.firstLight, // Se define el color del texto.
     shadowColor: AppColors.fourthLight,
-    textStyle: TextStyle(fontFamily: 'Catamaran', fontWeight: FontWeight.w600),
+    textStyle: TextStyle(
+      fontFamily: 'Catamaran',
+      fontWeight: FontWeight.w600,
+    ),
   ),
 );
+
+// Tema del TextField -light.
+final _textField = InputDecorationTheme(
+    suffixStyle: TextStyle(
+        fontFamily: 'Catamaran',
+        color: AppColors.sixthLight.withValues(alpha: 0.6),
+        fontWeight: FontWeight.w500),
+    hintStyle: TextStyle(
+        fontFamily: 'Catamaran',
+        color: AppColors.sixthLight.withValues(alpha: 0.6),
+        fontWeight: FontWeight.w300),
+    labelStyle: TextStyle(
+        fontFamily: 'Catamaran',
+        color: AppColors.sixthLight.withValues(alpha: 0.6),
+        fontWeight: FontWeight.w500));

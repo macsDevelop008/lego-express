@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:logo_express/configuration/configuration.dart';
-import 'package:logo_express/presentation/presentation.dart';
+import 'package:lego_express/configuration/configuration.dart';
+import 'package:lego_express/presentation/presentation.dart';
 
 /// Pantalla inicial.
 class InitialScreen extends StatelessWidget {

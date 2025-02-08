@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:logo_express/configuration/configuration.dart';
+import 'package:lego_express/configuration/configuration.dart';
 
 /// Widget que muestra el logo de la aplicación con un fondo de color circular.
 class GlobalLogoAplicationCircularView extends StatelessWidget {

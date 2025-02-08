@@ -1,4 +1,4 @@
-package com.example.logo_express
+package com.example.lego_express
 
 import io.flutter.embedding.android.FlutterActivity
 

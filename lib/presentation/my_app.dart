@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logo_express/configuration/configuration.dart';
+import 'package:lego_express/configuration/configuration.dart';
 
 /// Aplicación principal.
 class MyApp extends StatelessWidget {
