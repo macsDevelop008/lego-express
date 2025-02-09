@@ -84,7 +84,7 @@ class _GlobalTextFieldWidgetState extends State<GlobalTextFieldWidget> {
           textAlignVertical: TextAlignVertical.center, // Centrado en Y
           obscureText: _isObscureText() && _showText, // Ocultar texto
           style: TextStyle(
-              fontSize: widget.fontSize ?? widget.height * 0.5,
+              fontSize: widget.fontSize ?? widget.height * 0.4,
               color: AppColors(context: context).sixth),
           decoration: InputDecoration(
               border: InputBorder.none, // Eliminar border inferior.

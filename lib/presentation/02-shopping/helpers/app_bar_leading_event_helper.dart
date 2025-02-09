@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:lego_express/configuration/configuration.dart';
 import 'package:lego_express/presentation/presentation.dart';
@@ -9,11 +8,11 @@ void appBarLeadingEventHelper(BuildContext context) {
   final widthItem = ScreenResponsive.width(context: context);
   final heightItem = ScreenResponsive.height(context: context);
 
-  globalShowDialog(
+  /*globalShowDialog(
       context: context,
-      type: DialogType.info,
+      type: DialogType.alert,
       body: ShoppingLogOutChangeThemeView(
         width: widthItem * 0.8,
         height: heightItem * 0.2,
-      ));
+      ));*/
 }

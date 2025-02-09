@@ -29,7 +29,7 @@ class ShoppingLogOutChangeThemeView extends StatelessWidget {
                 isDarkMode: themeProvider == appThemeDark,
                 onChanged: (bool value) {
                   // Cerrar modal
-                  closeDialog(context: context);
+                  //closeDialog(context: context);
                   // Actulizar provider
                   var provider = ref.watch(appThemeProvider.notifier);
                   // Tema Light seleccionado

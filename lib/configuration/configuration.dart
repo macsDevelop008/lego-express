@@ -1,3 +1,5 @@
+export 'package:lego_express/configuration/enums/dialog_type_enum.dart';
+
 export 'package:lego_express/configuration/enums/app_theme_enum.dart';
 
 export 'package:lego_express/configuration/statics/responsive/screen_responsive.dart';

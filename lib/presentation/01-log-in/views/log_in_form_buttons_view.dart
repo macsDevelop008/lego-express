@@ -100,15 +100,16 @@ class _LogInFormButtonsViewState extends State<LogInFormButtonsView> {
           SizedBox(
             height: widget.height * 0.05,
           ),
-          // Botóno inicio de sesión
+          // Botón inicio de sesión
           GlobalButtonTextWidget(
             text: 'Iniciar Sesión',
             sizeText: widget.height * 0.05,
             width: widget.width * 0.7,
             height: widget.height * 0.11,
             roundedBorders: widget.height * 0.03,
-            event: () {
-              print('hola');
+            event: () async {
+              await uiLogInEmailPasswordHelper(
+                  context, userController.text, passwordController.text);
             },
           ),
           // Espacio

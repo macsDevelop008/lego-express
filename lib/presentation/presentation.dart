@@ -1,3 +1,9 @@
+export 'package:lego_express/infraestructure/driven-adapter/db/datasources/db_sqflite_datasource_impl.dart';
+
+export 'package:lego_express/presentation/global/helpers/global_loading_dialog_helper.dart';
+
+export 'package:lego_express/presentation/01-log-in/helpers/log_in_email_password_helper.dart';
+
 export 'package:lego_express/presentation/global/widgets/global_them_switch_widget.dart';
 
 export 'package:lego_express/presentation/02-shopping/views/shopping_log_out_change_theme_view.dart';
