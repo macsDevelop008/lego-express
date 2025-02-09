@@ -5,7 +5,7 @@ import 'package:lego_express/presentation/presentation.dart';
 /// Router de la aplicación.
 final appRouter = GoRouter(
     // ruta inicial.
-    initialLocation: ProductDetailScreen.route,
+    initialLocation: ShoppingCartScreen.route,
     routes: [
       // Ruta de la pantalla inicial.
       GoRoute(
@@ -39,5 +39,11 @@ final appRouter = GoRouter(
               price: 250,
               stock: 6),
         ),
+      ),
+      // Ruta de la pantalla carrito de compras.
+      GoRoute(
+        path: ShoppingCartScreen.route,
+        name: ShoppingCartScreen.name,
+        builder: (context, state) => const ShoppingCartScreen(),
       ),
     ]);

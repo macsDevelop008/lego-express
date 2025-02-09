@@ -8,8 +8,8 @@ class GlobalAddUnitWidget extends StatefulWidget {
       required this.minValue,
       required this.buttonsSize,
       required this.textUnitSize,
-      required this.buttonEnabled,
-      required this.buttonDisabled,
+      required this.buttonEnabledColor,
+      required this.buttonDisabledColor,
       required this.spaceHorizontalBeetwenElemnts});
 
   // Topes - Max es la cantidad en stock
@@ -19,9 +19,9 @@ class GlobalAddUnitWidget extends StatefulWidget {
   // Tamaño botones
   final double buttonsSize;
   // Colo boton habilitado
-  final Color buttonEnabled;
+  final Color buttonEnabledColor;
   // Colo boton deshabilitado
-  final Color buttonDisabled;
+  final Color buttonDisabledColor;
   // Tamaño texto unidad
   final double textUnitSize;
   // Espacio entre elementos
@@ -35,27 +35,42 @@ class _GlobalAddUnitWidgetState extends State<GlobalAddUnitWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       spacing: widget.spaceHorizontalBeetwenElemnts,
       children: [
         // Botón restar
-        FloatingActionButton(
-          onPressed: () {},
-          elevation: 0,
-          backgroundColor: widget.buttonEnabled,
-          child: Icon(Icons.remove),
+        SizedBox(
+          width: widget.buttonsSize,
+          height: widget.buttonsSize,
+          child: FloatingActionButton(
+            onPressed: () {},
+            elevation: 0,
+            backgroundColor: widget.buttonEnabledColor,
+            child: Icon(
+              Icons.remove,
+              size: widget.buttonsSize * 0.5,
+            ),
+          ),
         ),
         // Número unidad
         Text(
-          '1',
+          '99',
           style: TextStyle(
               fontWeight: FontWeight.w300, fontSize: widget.textUnitSize),
         ),
         // Botón sumar
-        FloatingActionButton(
-          onPressed: () {},
-          elevation: 0,
-          backgroundColor: widget.buttonDisabled,
-          child: Icon(Icons.add),
+        SizedBox(
+          width: widget.buttonsSize,
+          height: widget.buttonsSize,
+          child: FloatingActionButton(
+            onPressed: () {},
+            elevation: 0,
+            backgroundColor: widget.buttonDisabledColor,
+            child: Icon(
+              Icons.add,
+              size: widget.buttonsSize * 0.5,
+            ),
+          ),
         ),
       ],
     );

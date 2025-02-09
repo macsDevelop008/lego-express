@@ -1,0 +1,111 @@
+import 'package:flutter/material.dart';
+import 'package:lego_express/presentation/presentation.dart';
+
+class ShoppingCartScreen extends StatefulWidget {
+  const ShoppingCartScreen({super.key});
+
+  /// Nombre y ruta de la pantalla.
+  static const String name = 'shopping-cart-screen';
+  static const String route = '/$name';
+
+  @override
+  State<ShoppingCartScreen> createState() => _ShoppingCartScreenState();
+}
+
+class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
+  // Dimensiones de la pantalla.
+  late final double height;
+  late final double width;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Calculo inicial (unico) de las dimensiones de la pantalla.
+    final view = WidgetsBinding.instance.platformDispatcher.views.first;
+    height = view.physicalSize.height / view.devicePixelRatio;
+    width = view.physicalSize.width / view.devicePixelRatio;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Obtener el tema.
+    final theme = Theme.of(context);
+
+    return Scaffold(
+        // Visible bajo el AppBar.
+        extendBodyBehindAppBar: true,
+        appBar: ShoppingCartAppBarView(
+          leadingPaddingLeft: width * 0.01,
+          appTheme: theme,
+        ),
+        body: SizedBox(
+            height: height,
+            width: width,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Fondo de la pantalla.
+                GlobalBackgroundBlurredColorView(
+                  height: height,
+                  width: width,
+                ),
+                SafeArea(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Parte 1 sin base
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+                      color: Colors.amber.withValues(alpha: 0),
+                      width: width,
+                      height: height * 0.45,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          // Titulo
+                          ShoppingCartTitleView(
+                            title: 'Mi carrito',
+                            titleSize: height * 0.035,
+                          ),
+                          // Listado Carrito
+                          ShoppingCartListProductsView(
+                            height: height * 0.37,
+                            width: width,
+                            theme: theme,
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Parte 2 base curvada
+                    Expanded(child: LayoutBuilder(
+                      builder:
+                          (BuildContext context, BoxConstraints constraints) {
+                        // Dimensiones
+                        final widthBase = constraints.maxWidth;
+                        final heightBase = constraints.maxHeight;
+
+                        return Container(
+                          color: Colors.green,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: width * 0.05),
+                          width: widthBase,
+                          height: heightBase,
+                          child: Column(
+                            children: [
+                              // Subtotal
+                              // Descuento
+                              // Total
+                              // Botón pagar
+                            ],
+                          ),
+                        );
+                      },
+                    )),
+                  ],
+                ))
+              ],
+            )));
+  }
+}

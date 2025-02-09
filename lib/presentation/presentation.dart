@@ -1,3 +1,15 @@
+export 'package:lego_express/presentation/04-shopping-cart/widgets/shopping_card_product_widget.dart';
+
+export 'package:lego_express/presentation/04-shopping-cart/views/shopping_cart_list_products_view.dart';
+
+export 'package:lego_express/presentation/04-shopping-cart/views/shopping_cart_title_view.dart';
+
+export 'package:lego_express/presentation/04-shopping-cart/widgets/shopping_cart_leading_widget.dart';
+
+export 'package:lego_express/presentation/04-shopping-cart/views/shopping_cart_app_bar_view.dart';
+
+export 'package:lego_express/presentation/04-shopping-cart/screens/shopping_cart_screen.dart';
+
 export 'package:lego_express/presentation/03-product-detail/views/product_detail_button_add_to_cart_view.dart';
 
 export 'package:lego_express/presentation/global/widgets/global_add_unit_widget.dart';
