@@ -1,4 +1,10 @@
-export 'package:lego_express/presentation/04-shopping-cart/widgets/shopping_card_product_widget.dart';
+export 'package:lego_express/presentation/04-shopping-cart/views/shopping_cart_button_pay_view.dart';
+
+export 'package:lego_express/presentation/04-shopping-cart/widgets/shopping_cart_total_account_text_widget.dart';
+
+export 'package:lego_express/presentation/04-shopping-cart/views/shopping_cart_total_account_view.dart';
+
+export 'package:lego_express/presentation/04-shopping-cart/widgets/shopping_cart_product_widget.dart';
 
 export 'package:lego_express/presentation/04-shopping-cart/views/shopping_cart_list_products_view.dart';
 

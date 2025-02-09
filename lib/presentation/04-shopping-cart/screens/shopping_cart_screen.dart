@@ -54,7 +54,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // Parte 1 sin base
+                    // Parte superior sin base
                     Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(horizontal: width * 0.05),
@@ -78,7 +78,7 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                         ],
                       ),
                     ),
-                    // Parte 2 base curvada
+                    // Parte inferior base curvada
                     Expanded(child: LayoutBuilder(
                       builder:
                           (BuildContext context, BoxConstraints constraints) {
@@ -87,20 +87,44 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                         final heightBase = constraints.maxHeight;
 
                         return Container(
-                          color: Colors.green,
-                          padding:
-                              EdgeInsets.symmetric(horizontal: width * 0.05),
-                          width: widthBase,
-                          height: heightBase,
-                          child: Column(
-                            children: [
-                              // Subtotal
-                              // Descuento
-                              // Total
-                              // Botón pagar
-                            ],
-                          ),
-                        );
+                            color: Colors.blue.withValues(alpha: 0),
+                            /*padding:
+                              EdgeInsets.symmetric(horizontal: width * 0.05),*/
+                            width: widthBase,
+                            height: heightBase,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                // Base curvada de fondo
+                                GlobalBaseCurveCustomWidget(
+                                    heightBase: heightBase,
+                                    widthBase: widthBase,
+                                    colorBase: theme.primaryColor
+                                        .withValues(alpha: 0.7)),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: width * 0.05),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      // Subtotal, Descuento y Total
+                                      ShoppingCartTotalAccountView(
+                                        height: heightBase * 0.6,
+                                        width: widthBase,
+                                        appTheme: theme,
+                                      ),
+
+                                      // Botón pagar
+                                      ShoppingCartButtonPayView(
+                                        height: heightBase,
+                                        width: widthBase,
+                                        appTheme: theme,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ));
                       },
                     )),
                   ],

@@ -10,7 +10,8 @@ class ShoppingCardProductWidget extends StatelessWidget {
       required this.backgroundColor,
       required this.dataProduct,
       required this.buttonEnabledColor,
-      required this.buttonDisabledColor});
+      required this.buttonDisabledColor,
+      required this.iconDelteColor});
 
   // Dimensiones
   final double height;
@@ -23,6 +24,8 @@ class ShoppingCardProductWidget extends StatelessWidget {
   final Color buttonEnabledColor;
   // Color btm deseleccionado widget agregar y eliminar unidad
   final Color buttonDisabledColor;
+  // Color icono eliminar
+  final Color iconDelteColor;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,11 @@ class ShoppingCardProductWidget extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.w700),
                     ),
                     // Precio total
-                    Text('\$123'),
+                    Text(
+                      '\$123',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700, fontSize: height * 0.15),
+                    ),
                     // Agregar y eliminar unidad de producto
                     GlobalAddUnitWidget(
                         maxValue: dataProduct.productEntityInformation.stock,
@@ -77,11 +84,18 @@ class ShoppingCardProductWidget extends StatelessWidget {
               );
             },
           )),
-          //
+          // Botón eliminar
           Container(
-            width: 40,
-            color: Colors.red,
-            child: Icon(Icons.delete),
+            width: width * 0.14,
+            height: height,
+            color: Colors.red.withValues(alpha: 0),
+            child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.delete_outlined,
+                  size: height * 0.25,
+                  color: iconDelteColor,
+                )),
           )
         ],
       ),

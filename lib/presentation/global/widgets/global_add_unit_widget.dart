@@ -45,6 +45,9 @@ class _GlobalAddUnitWidgetState extends State<GlobalAddUnitWidget> {
           child: FloatingActionButton(
             onPressed: () {},
             elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.buttonsSize * 0.2),
+            ),
             backgroundColor: widget.buttonEnabledColor,
             child: Icon(
               Icons.remove,
@@ -65,6 +68,9 @@ class _GlobalAddUnitWidgetState extends State<GlobalAddUnitWidget> {
           child: FloatingActionButton(
             onPressed: () {},
             elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(widget.buttonsSize * 0.2),
+            ),
             backgroundColor: widget.buttonDisabledColor,
             child: Icon(
               Icons.add,
