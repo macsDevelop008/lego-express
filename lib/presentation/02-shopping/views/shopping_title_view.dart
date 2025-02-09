@@ -33,7 +33,7 @@ class ShoppingTitleView extends StatelessWidget {
         imageSize: height * 0.008,
         routeImage: 'assets/images/hand.png',
         maxSizeHorizontal: width * 0.7,
-        text: 'Hola, Miguel!',
+        text: 'Hola, Usuario!',
       ),
     );
   }

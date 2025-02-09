@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lego_express/configuration/configuration.dart';
+import 'package:lego_express/domain/domain.dart';
 import 'package:lego_express/infraestructure/driven-adapter/db/repositories/db_repository_impl.dart';
 import 'package:lego_express/infraestructure/infraestructure.dart';
 import 'package:lego_express/presentation/presentation.dart';
@@ -36,8 +38,9 @@ Future uiLogInEmailPasswordHelper(
       // Si se realizó el logIn
       else {
         // Almacenar usuario logueado
-        await _saveUser();
+        await _saveUser(dataResult);
         // Pasar a la vista principal de productos
+        context.go(ShoppingScreen.route);
       }
     } else {
       showCustomDialog(
@@ -65,10 +68,12 @@ Future uiLogInEmailPasswordHelper(
   }
 }
 
-Future _saveUser() async {
+/// Almacena los datos del usuario que hizo el login.
+Future _saveUser(LogInEntity logInEntity) async {
   // Fuente de información
   final datasource = DbSqfliteDatasourceImpl();
   final repository = DbRepositoryImpl(datasource: datasource);
 
   await repository.initDb();
+  await repository.saveUser(logInEntity);
 }

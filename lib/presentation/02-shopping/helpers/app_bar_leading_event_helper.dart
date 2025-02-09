@@ -8,11 +8,12 @@ void appBarLeadingEventHelper(BuildContext context) {
   final widthItem = ScreenResponsive.width(context: context);
   final heightItem = ScreenResponsive.height(context: context);
 
-  /*globalShowDialog(
+  showCustomDialog(
       context: context,
       type: DialogType.alert,
+      barrierDismissible: true,
       body: ShoppingLogOutChangeThemeView(
         width: widthItem * 0.8,
         height: heightItem * 0.2,
-      ));*/
+      ));
 }

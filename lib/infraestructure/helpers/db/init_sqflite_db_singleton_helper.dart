@@ -25,11 +25,11 @@ class InitSqfliteDbSingletonHelper {
 
     final path = join(documentDir.path, 'LegoExpress.db');
 
-    return await openDatabase(path, version: 1, onOpen: (db) {},
+    return await openDatabase(path, version: 2, onOpen: (db) {},
         onCreate: (db, version) async {
       await db.execute('''
-        CREATE TABLE IF NOT EXIST users (
-          id INTEGER PRIMARY KEY,
+        CREATE TABLE IF NOT EXISTS users (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
           uuid TEXT
         )
       ''');

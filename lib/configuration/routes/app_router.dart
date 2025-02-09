@@ -5,7 +5,7 @@ import 'package:lego_express/presentation/presentation.dart';
 /// Router de la aplicación.
 final appRouter = GoRouter(
     // ruta inicial.
-    initialLocation: LogInScreen.route,
+    initialLocation: InitialScreen.route,
     routes: [
       // Ruta de la pantalla inicial.
       GoRoute(

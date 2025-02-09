@@ -57,9 +57,9 @@ class _LogInScreenState extends State<LogInScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       // Animación de compra.
-                      /*GlobalShoppingAnimationView(
+                      GlobalShoppingAnimationView(
                         size: width * 0.6,
-                      ),*/
+                      ),
                       // Eslogan y título de la app.
                       LogInTitleSloganView(
                         titleSize: width * 0.1,

@@ -3,8 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lego_express/configuration/enums/dialog_type_enum.dart';
 import 'package:lego_express/configuration/statics/responsive/screen_responsive.dart';
 
-/// Función para mostrar un diálogo personalizado con animación de rebote.
-/// Los botones "Aceptar" y "Cancelar" se muestran solo si se pasan sus respectivos callbacks.
+/// Helper para mostrar un diálogo personalizado con animación de rebote.
 Future showCustomDialog({
   required BuildContext context,
   required DialogType type,

@@ -8,22 +8,22 @@ class DbRepositoryImpl implements DbRepository {
   DbRepositoryImpl({required this.datasource});
 
   @override
-  Future<UserDbEntity> getUser(String uuid) async {
-    return await datasource.getUser(uuid);
-  }
-
-  @override
   Future initDb() async {
     return await datasource.initDb();
   }
 
   @override
-  Future<bool> deleteUser(int dbId) async {
-    return await datasource.deleteUser(dbId);
+  Future<bool> saveUser(LogInEntity logInEntity) async {
+    return await datasource.saveUser(logInEntity);
   }
 
   @override
-  Future<bool> saveUser(LogInEntity logInEntity) async {
-    return await datasource.saveUser(logInEntity);
+  Future<bool> deleteAllUsers() async {
+    return await datasource.deleteAllUsers();
+  }
+
+  @override
+  Future<List<UserDbEntity>> getAllUsers() async {
+    return await datasource.getAllUsers();
   }
 }

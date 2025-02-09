@@ -1,3 +1,7 @@
+export 'package:lego_express/presentation/global/helpers/global_log_out_helper.dart';
+
+export 'package:lego_express/presentation/00-initial/helpers/initial_data_helper.dart';
+
 export 'package:lego_express/infraestructure/driven-adapter/db/datasources/db_sqflite_datasource_impl.dart';
 
 export 'package:lego_express/presentation/global/helpers/global_loading_dialog_helper.dart';

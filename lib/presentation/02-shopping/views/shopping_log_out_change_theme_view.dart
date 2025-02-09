@@ -46,7 +46,11 @@ class ShoppingLogOutChangeThemeView extends StatelessWidget {
           ),
           // Botón cerrar sesión
           GlobalButtonTextWidget(
-              text: 'Cerrar Sesión', sizeText: height * 0.15, event: () {})
+              text: 'Cerrar Sesión',
+              sizeText: height * 0.15,
+              event: () async {
+                await globalLogOutHelper(context);
+              })
         ],
       ),
     );

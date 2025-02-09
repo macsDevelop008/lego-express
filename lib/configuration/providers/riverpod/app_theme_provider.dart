@@ -6,5 +6,5 @@ import 'package:lego_express/configuration/configuration.dart';
 ///
 /// @return el tema de la aplicación actual.
 final appThemeProvider = StateProvider<ThemeData>((ref) {
-  return appThemeDark;
+  return appThemeLight;
 });

@@ -3,12 +3,28 @@ import 'package:lego_express/configuration/configuration.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
 /// Pantalla inicial.
-class InitialScreen extends StatelessWidget {
+class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
 
   /// Nombre y ruta de la pantalla.
   static const String name = 'initial-screen';
   static const String route = '/$name';
+
+  @override
+  State<InitialScreen> createState() => _InitialScreenState();
+}
+
+class _InitialScreenState extends State<InitialScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    // Ejecutar despues del build
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Inicializa data
+      await initialDataHelper(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -8,18 +8,6 @@ class DbSqfliteDatasourceImpl implements DbDatasource {
   late Database db;
 
   @override
-  Future<bool> deleteUser(int dbId) async {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<UserDbEntity> getUser(String uuid) async {
-    // TODO: implement getUser
-    throw UnimplementedError();
-  }
-
-  @override
   Future<bool> initDb() async {
     try {
       db = await InitSqfliteDbSingletonHelper.db.database;
@@ -39,6 +27,31 @@ class DbSqfliteDatasourceImpl implements DbDatasource {
     } catch (e) {
       Logger().e('Error al guardar un usuario en la DB: $e');
       return false;
+    }
+  }
+
+  @override
+  Future<bool> deleteAllUsers() async {
+    try {
+      await db.delete('users');
+      return true;
+    } catch (e) {
+      Logger()
+          .e('Error al eliminar los datos de la tabla "users" en la DB: $e');
+      return false;
+    }
+  }
+
+  @override
+  Future<List<UserDbEntity>> getAllUsers() async {
+    try {
+      final result = await db.query('users');
+      return result.map((e) {
+        return UserDbEntity(uuid: e['uuid'].toString(), id: e['id'] as int);
+      }).toList();
+    } catch (e) {
+      Logger().e('Error al obtener los datos de la tabla "users" en la DB: $e');
+      return [];
     }
   }
 }
