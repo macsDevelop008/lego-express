@@ -7,7 +7,10 @@ class ScreenResponsive {
   /// @param [context] Contexto de la aplicación.
   /// @param [percentaje] Porcentaje para calcular.
   /// @return Ancho de la pantalla según el porcentaje solicitado.
-  static double width({required BuildContext context, double percentaje = 1}) {
+  static double width({
+    required BuildContext context,
+    double percentaje = 1,
+  }) {
     return MediaQuery.of(context).size.width * percentaje;
   }
 

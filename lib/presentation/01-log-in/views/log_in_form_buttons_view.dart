@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
@@ -118,9 +120,15 @@ class _LogInFormButtonsViewState extends State<LogInFormButtonsView> {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: widget.width * 0.06,
             children: [
-              _buttonLogInSocial(() {}, 'assets/images/icon_google.png'),
-              _buttonLogInSocial(() {}, 'assets/images/icon_apple.png'),
-              _buttonLogInSocial(() {}, 'assets/images/icon_facebook.png'),
+              _buttonLogInSocial(() {}, 'assets/images/icons/icon_google.png',
+                  widget.height * 0.006),
+              // Si está en iOS.
+              if (Platform.isIOS) ...[
+                _buttonLogInSocial(() {}, 'assets/images/icons/icon_apple.png',
+                    widget.height * 0.006)
+              ],
+              _buttonLogInSocial(() {}, 'assets/images/icons/icon_facebook.png',
+                  widget.height * 0.006),
             ],
           )
           // Inicio Sesión apple
@@ -129,14 +137,20 @@ class _LogInFormButtonsViewState extends State<LogInFormButtonsView> {
     );
   }
 
+  /// Botón para inicio de sesión con red social.
+  ///
+  /// @param [event] evento del botón.
+  /// @param [routeImage] ruta de la imagen.
+  /// @param [imageScale] tamaño de la imagen.
+  /// @return Widget botón.
   GlobalButtonImageWidget _buttonLogInSocial(
-      VoidCallback event, String routeImage) {
+      VoidCallback event, String routeImage, double imageScale) {
     return GlobalButtonImageWidget(
       width: widget.width * 0.15,
       height: widget.width * 0.15,
       roundedBorders: widget.width * 0.05,
       image: Transform.scale(
-        scale: 2,
+        scale: imageScale,
         child: Image.asset(
           routeImage,
         ),

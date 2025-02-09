@@ -17,7 +17,7 @@ class AppColors {
   static const sixthLight = Color.fromRGBO(46, 55, 101, 1);
 */
   /// Fondo o color base (ligeramente apagado para no ser tan puro blanco)
-  static const firstLight = Color.fromRGBO(240, 240, 240, 1);
+  static const firstLight = Color.fromRGBO(255, 255, 255, 1);
 
   /// Azul fuerte, ideal para acentos y botones
   static const secondLight = Color.fromRGBO(21, 101, 192, 1);

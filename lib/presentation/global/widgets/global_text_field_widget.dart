@@ -14,7 +14,9 @@ class GlobalTextFieldWidget extends StatefulWidget {
       this.hintText,
       this.horizontalPadding,
       this.iconSize,
-      this.icon});
+      this.icon,
+      this.useShadow,
+      this.shadowColor});
 
   // Ancho del widget.
   final double width;
@@ -38,6 +40,10 @@ class GlobalTextFieldWidget extends StatefulWidget {
   final IconData? icon;
   // Tamaño del icono.
   final double? iconSize;
+  // Usar sombra
+  final bool? useShadow;
+  // Color de la sombra
+  final Color? shadowColor;
 
   @override
   State<GlobalTextFieldWidget> createState() => _GlobalTextFieldWidgetState();
@@ -63,7 +69,15 @@ class _GlobalTextFieldWidgetState extends State<GlobalTextFieldWidget> {
       decoration: BoxDecoration(
           color: widget.backgroundColor,
           borderRadius:
-              BorderRadius.all(Radius.circular(widget.borderRadiusValue))),
+              BorderRadius.all(Radius.circular(widget.borderRadiusValue)),
+          boxShadow: (widget.useShadow != null && widget.useShadow!)
+              ? [
+                  BoxShadow(
+                      color: widget.shadowColor!,
+                      blurRadius: widget.height * 0.06,
+                      spreadRadius: widget.height * 0.01)
+                ]
+              : null),
       child: TextField(
           controller: widget.controller,
           textAlign: TextAlign.left, // Centrado en X

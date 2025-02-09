@@ -6,7 +6,9 @@ final appThemeLight = ThemeData.light().copyWith(
     primaryColor: AppColors.firstLight,
     textTheme: _texTheme,
     elevatedButtonTheme: _elevationButton,
-    inputDecorationTheme: _textField);
+    inputDecorationTheme: _textField,
+    appBarTheme: _appBar,
+    floatingActionButtonTheme: _floatingActionButtonTheme);
 
 // Tema del texto - light.
 final _texTheme = TextTheme(
@@ -26,7 +28,7 @@ final _elevationButton = ElevatedButtonThemeData(
   ),
 );
 
-// Tema del TextField -light.
+// Tema del TextField - light.
 final _textField = InputDecorationTheme(
     suffixStyle: TextStyle(
         fontFamily: 'Catamaran',
@@ -40,3 +42,11 @@ final _textField = InputDecorationTheme(
         fontFamily: 'Catamaran',
         color: AppColors.sixthLight.withValues(alpha: 0.6),
         fontWeight: FontWeight.w500));
+
+// Tema del appBar - light.
+final _appBar = AppBarTheme(
+    backgroundColor: Colors.transparent, shadowColor: Colors.transparent);
+
+// Tema del botón flotante - light
+final _floatingActionButtonTheme =
+    FloatingActionButtonThemeData(backgroundColor: AppColors.thirdLight);

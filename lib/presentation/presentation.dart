@@ -1,3 +1,27 @@
+export 'package:lego_express/presentation/02-shopping/widgets/shopping_floating_action_button.dart';
+
+export 'package:lego_express/presentation/02-shopping/widgets/shopping_product_item_widget.dart';
+
+export 'package:lego_express/presentation/02-shopping/views/shopping_grid_products_view.dart';
+
+export 'package:lego_express/presentation/02-shopping/widgets/shopping_categorie_item_widget.dart';
+
+export 'package:lego_express/presentation/02-shopping/views/shopping_list_categories_view.dart';
+
+export 'package:lego_express/presentation/02-shopping/views/shopping_bar_search_view.dart';
+
+export 'package:lego_express/presentation/02-shopping/widgets/shopping_text_image_widget.dart';
+
+export 'package:lego_express/presentation/02-shopping/views/shopping_title_view.dart';
+
+export 'package:lego_express/presentation/02-shopping/widgets/shopping_image_user_widget.dart';
+
+export 'package:lego_express/presentation/02-shopping/widgets/shopping_leading_widget.dart';
+
+export 'package:lego_express/presentation/02-shopping/views/shopping_app_bar_view.dart';
+
+export 'package:lego_express/presentation/02-shopping/screens/shopping_screen.dart';
+
 export 'package:lego_express/presentation/global/widgets/global_button_image_widget.dart';
 
 export 'package:lego_express/presentation/global/widgets/global_button_text_widget.dart';

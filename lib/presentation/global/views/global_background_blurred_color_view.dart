@@ -29,8 +29,8 @@ class GlobalBackgroundBlurredColorView extends StatelessWidget {
               top: height * 0.25,
               left: width * -0.5,
               child: GlobalBasicCircleColorWidget(
-                size: width * 1.4,
-                color: appColors.fourth.withValues(alpha: 0.4),
+                size: width * 1.5,
+                color: appColors.fourth.withValues(alpha: 0.25),
               ),
             ),
             // Circulo decorativo superior derecho.
@@ -39,7 +39,7 @@ class GlobalBackgroundBlurredColorView extends StatelessWidget {
               right: width * -0.15,
               child: GlobalBasicCircleColorWidget(
                 size: width * .9,
-                color: appColors.fifth.withValues(alpha: 0.4),
+                color: appColors.fifth.withValues(alpha: 0.3),
               ),
             ),
             // Circulo decorativo inferior derecho.
@@ -48,7 +48,7 @@ class GlobalBackgroundBlurredColorView extends StatelessWidget {
               right: width * -0.15,
               child: GlobalBasicCircleColorWidget(
                 size: width * .9,
-                color: appColors.fifth.withValues(alpha: 0.4),
+                color: appColors.fifth.withValues(alpha: 0.2),
               ),
             ),
             // Cuadro de desenfoque - efecto.
