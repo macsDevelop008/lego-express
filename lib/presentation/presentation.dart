@@ -1,3 +1,11 @@
+export 'package:lego_express/presentation/global/widgets/global_them_switch_widget.dart';
+
+export 'package:lego_express/presentation/02-shopping/views/shopping_log_out_change_theme_view.dart';
+
+export 'package:lego_express/presentation/02-shopping/helpers/app_bar_leading_event_helper.dart';
+
+export 'package:lego_express/presentation/global/helpers/global_dialog_helper.dart';
+
 export 'package:lego_express/presentation/04-shopping-cart/views/shopping_cart_button_pay_view.dart';
 
 export 'package:lego_express/presentation/04-shopping-cart/widgets/shopping_cart_total_account_text_widget.dart';

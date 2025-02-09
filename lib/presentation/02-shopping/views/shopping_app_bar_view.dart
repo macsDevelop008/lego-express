@@ -26,7 +26,9 @@ class ShoppingAppBarView extends StatelessWidget
       leading: ShoppingLeadingWidget(
         paddingLeft: leadingPaddingLeft,
         event: () {
-          print('menú');
+          appBarLeadingEventHelper(
+            context,
+          );
         },
         color: AppColors(context: context).sixth,
       ),

@@ -24,7 +24,7 @@ class LogInFormButtonsView extends StatefulWidget {
 }
 
 class _LogInFormButtonsViewState extends State<LogInFormButtonsView> {
-  // Controlador para el ingreso del usuario.
+  // Controlador para el ingreso del email.
   late final TextEditingController userController;
   // Controlador para el ingreso de la contraseña.
   late final TextEditingController passwordController;
@@ -55,22 +55,22 @@ class _LogInFormButtonsViewState extends State<LogInFormButtonsView> {
           SizedBox(
             height: widget.height * 0.07,
           ),
-          // Titulo - Usuario
+          // Titulo - Email
           LogInFormTitleTextWidget(
-            text: 'Usuario',
+            text: 'Email',
             textSize: widget.height * 0.045,
             paddinfLeft: widget.height * 0.14,
             color: widget.appTheme.textTheme.bodyMedium!.color!
                 .withValues(alpha: 0.5),
           ),
-          // TextField para el ingreso del usuario.
+          // TextField para el ingreso del email.
           GlobalTextFieldWidget(
             width: widget.width * 0.8,
             height: widget.height * 0.11,
             backgroundColor: _backgroundColorTextField(),
             borderRadiusValue: widget.width * 0.04,
             controller: userController,
-            hintText: 'Ingresa tu Usuario',
+            hintText: 'Ingresa tu Email',
             isObscureText: false,
           ),
           // Espacio

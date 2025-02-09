@@ -8,7 +8,22 @@ final appThemeLight = ThemeData.light().copyWith(
     elevatedButtonTheme: _elevationButton,
     inputDecorationTheme: _textField,
     appBarTheme: _appBar,
-    floatingActionButtonTheme: _floatingActionButtonTheme);
+    floatingActionButtonTheme: _floatingActionButtonTheme,
+    switchTheme: _switchThemeData);
+
+// Tema del Switch - light.
+final _switchThemeData = SwitchThemeData(
+  thumbColor: WidgetStateProperty.resolveWith<Color>(
+    (Set<WidgetState> states) {
+      // Si el Switch está seleccionado
+      if (states.contains(WidgetState.selected)) {
+        return AppColors.fifthLight;
+      }
+      // En caso contrario
+      return Colors.grey;
+    },
+  ),
+);
 
 // Tema del texto - light.
 final _texTheme = TextTheme(

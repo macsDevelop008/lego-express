@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lego_express/configuration/configuration.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
 /// Pantalla de inicio de sesión.
@@ -45,6 +47,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 height: height,
                 width: width,
               ),
+
               // Scroll para los TextField.
               SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
@@ -72,6 +75,33 @@ class _LogInScreenState extends State<LogInScreen> {
                       ),
                     ],
                   ),
+                ),
+              ),
+              // Switch para cambiar de tema.
+              Positioned(
+                top: height * 0.07,
+                right: width * 0.05,
+                child: Consumer(
+                  builder:
+                      (BuildContext context, WidgetRef ref, Widget? child) {
+                    final themeProvider = ref.watch(appThemeProvider);
+
+                    return GlobalThemeSwitchWidget(
+                      isDarkMode: themeProvider == appThemeDark,
+                      onChanged: (bool value) {
+                        // Actulizar provider
+                        var provider = ref.watch(appThemeProvider.notifier);
+                        // Tema Light seleccionado
+                        if (!value) {
+                          provider.state = appThemeLight;
+                        }
+                        // Tema oscuro seleccionado
+                        else {
+                          provider.state = appThemeDark;
+                        }
+                      },
+                    );
+                  },
                 ),
               ),
             ],
