@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "605719510745",
+    "project_id": "logo-express-85106",
+    "storage_bucket": "logo-express-85106.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605719510745:android:01be4f77fe531194eb88c8",
+        "android_client_info": {
+          "package_name": "com.example.lego_express"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgbTzOzt_bsZTUtJCTVX17gl-SWiOHFCc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
