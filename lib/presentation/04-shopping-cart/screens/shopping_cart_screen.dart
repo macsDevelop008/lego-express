@@ -119,7 +119,6 @@ class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
                                           width: widthBase,
                                           appTheme: theme,
                                         ),
-
                                         // Botón pagar
                                         ShoppingCartButtonPayView(
                                           height: heightBase,

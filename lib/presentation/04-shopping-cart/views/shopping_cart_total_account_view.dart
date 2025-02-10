@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lego_express/configuration/configuration.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
 /// Vista con el listado total y precio del carrito.
-class ShoppingCartTotalAccountView extends StatelessWidget {
+class ShoppingCartTotalAccountView extends ConsumerWidget {
   const ShoppingCartTotalAccountView(
       {super.key,
       required this.height,
@@ -16,7 +18,14 @@ class ShoppingCartTotalAccountView extends StatelessWidget {
   final ThemeData appTheme;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final listItems = ref.watch(listAllProductsProvider).where((e) {
+      return e.unitCartList > 0;
+    });
+    double totalPrice = 0.0;
+    for (var element in listItems) {
+      totalPrice += element.price;
+    }
     return Container(
       color: Colors.red.withValues(alpha: 0),
       height: height,
@@ -33,7 +42,7 @@ class ShoppingCartTotalAccountView extends StatelessWidget {
             height: height * 0.14,
             width: width,
             leftText: 'Subtotal:',
-            rightText: '\$450',
+            rightText: '\$$totalPrice',
             sizeText: height * 0.1,
           ),
           // Descuento
@@ -41,7 +50,7 @@ class ShoppingCartTotalAccountView extends StatelessWidget {
             height: height * 0.14,
             width: width,
             leftText: 'Descuento:',
-            rightText: '-10%',
+            rightText: '0%',
             sizeText: height * 0.1,
           ),
           // Linea decorativa
@@ -51,7 +60,7 @@ class ShoppingCartTotalAccountView extends StatelessWidget {
             height: height * 0.15,
             width: width,
             leftText: 'Total:',
-            rightText: '\$450',
+            rightText: '\$$totalPrice',
             sizeText: height * 0.12,
             isBoldText: true,
           ),

@@ -3,9 +3,36 @@ import 'package:lego_express/domain/domain.dart';
 
 class RequestTestDatasourceImpl implements RequestDatasource {
   @override
-  Future<(GeneralRequestType, List<ProductEntity>?)> buyProdycts() {
-    // TODO: implement buyProdycts
-    throw UnimplementedError();
+  Future<(GeneralRequestType, List<ProductEntity>?)> buyProdycts() async {
+    return (
+      GeneralRequestType.success,
+      [
+        ProductEntity(
+            id: 1,
+            pathNetworkImage:
+                'https://www.lego.com/cdn/cs/set/assets/blt742e8599eb5e8931/40649.png?fit=bounds&format=jpg&quality=80&width=1500&height=1500&dpr=1',
+            title: 'Titlo 456',
+            price: 200,
+            stock: 1,
+            unitCartList: 0),
+        ProductEntity(
+            id: 2,
+            pathNetworkImage:
+                'https://www.lego.com/cdn/cs/set/assets/blt742e8599eb5e8931/40649.png?fit=bounds&format=jpg&quality=80&width=1500&height=1500&dpr=1',
+            title: 'Titulo 1',
+            price: 400,
+            stock: 2,
+            unitCartList: 0),
+        ProductEntity(
+            id: 3,
+            pathNetworkImage:
+                'https://www.lego.com/cdn/cs/set/assets/blt742e8599eb5e8931/40649.png?fit=bounds&format=jpg&quality=80&width=1500&height=1500&dpr=1',
+            title: 'Titulo 165',
+            price: 140,
+            stock: 2,
+            unitCartList: 0),
+      ]
+    );
   }
 
   @override

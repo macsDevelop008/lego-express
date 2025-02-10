@@ -18,7 +18,7 @@ class GlobalButtonTextWidget extends StatelessWidget {
   // Tamaño del texto.
   final double sizeText;
   // Evento del botón.
-  final VoidCallback event;
+  final VoidCallback? event;
   // Bordes redondeados.
   final double? roundedBorders;
   // Alto.
@@ -33,9 +33,11 @@ class GlobalButtonTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
-          event();
-        },
+        onPressed: event != null
+            ? () {
+                event!();
+              }
+            : null,
         style: ElevatedButton.styleFrom(
             backgroundColor: color,
             shape: roundedBorders != null

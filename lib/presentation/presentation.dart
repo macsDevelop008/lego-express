@@ -1,3 +1,5 @@
+export 'package:lego_express/presentation/04-shopping-cart/helper/ui_shopping_cart_buy_event_helper.dart';
+
 export 'package:lego_express/presentation/04-shopping-cart/helper/ui_shopping_cart_delete_event.dart';
 
 export 'package:lego_express/presentation/02-shopping/helpers/ui_event_floatin_action_button_helper.dart';

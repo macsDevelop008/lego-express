@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lego_express/configuration/configuration.dart';
 import 'package:lego_express/domain/domain.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
@@ -10,7 +8,7 @@ class ShoppingCardProductWidget extends StatelessWidget {
       required this.height,
       required this.width,
       required this.backgroundColor,
-      required this.dataProduct,
+      required this.productEntity,
       required this.buttonEnabledColor,
       required this.buttonDisabledColor,
       required this.iconDelteColor});
@@ -21,7 +19,7 @@ class ShoppingCardProductWidget extends StatelessWidget {
   // Color del fondo
   final Color backgroundColor;
   // Datos del producto
-  final ProductEntity dataProduct;
+  final ProductEntity productEntity;
   // Color btm seleccionado widget agregar y eliminar unidad
   final Color buttonEnabledColor;
   // Color btm deseleccionado widget agregar y eliminar unidad
@@ -43,7 +41,7 @@ class ShoppingCardProductWidget extends StatelessWidget {
         children: [
           // Imagen
           GlobalNetworkImageWidget(
-              size: height, urlImage: dataProduct.pathNetworkImage),
+              size: height, urlImage: productEntity.pathNetworkImage),
           Expanded(child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               final x = constraints.maxWidth;
@@ -60,31 +58,21 @@ class ShoppingCardProductWidget extends StatelessWidget {
                   children: [
                     // Titulo o nombre
                     Text(
-                      dataProduct.title,
+                      productEntity.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.w700),
                     ),
                     // Precio total
                     Text(
-                      '\$123',
+                      '\$${productEntity.price}',
                       style: TextStyle(
                           fontWeight: FontWeight.w700, fontSize: height * 0.15),
                     ),
                     Text(
-                      'Cantidad: ${dataProduct.unitCartList}',
+                      'Cantidad: ${productEntity.unitCartList}',
                       style: TextStyle(fontSize: 18),
                     ),
-                    // Agregar y eliminar unidad de producto
-                    /*GlobalAddUnitWidget(
-                      minValue: 0,
-                      buttonsSize: height * 0.3,
-                      textUnitSize: height * 0.12,
-                      buttonEnabledColor: buttonEnabledColor,
-                      buttonDisabledColor: buttonDisabledColor,
-                      spaceHorizontalBeetwenElemnts: width * 0.025,
-                      productEntity: dataProduct,
-                    ),*/
                   ],
                 ),
               );
@@ -96,7 +84,9 @@ class ShoppingCardProductWidget extends StatelessWidget {
             height: height,
             color: Colors.red.withValues(alpha: 0),
             child: IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await uiShoppingCartDeleteEvent(context, productEntity);
+                },
                 icon: Icon(
                   Icons.delete_outlined,
                   size: height * 0.25,

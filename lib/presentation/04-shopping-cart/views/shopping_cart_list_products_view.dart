@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lego_express/configuration/configuration.dart';
-import 'package:lego_express/domain/domain.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
 /// Vista que contiene el listado de productos seeccionados para la compra.
@@ -40,7 +39,7 @@ class ShoppingCartListProductsView extends StatelessWidget {
                     height: height * 0.38,
                     width: width * 0.9,
                     backgroundColor: theme.primaryColor.withValues(alpha: 0.7),
-                    dataProduct: listProducts[index],
+                    productEntity: listProducts[index],
                     buttonEnabledColor: AppColors(context: context).fifth,
                     buttonDisabledColor: AppColors(context: context)
                         .fifth
