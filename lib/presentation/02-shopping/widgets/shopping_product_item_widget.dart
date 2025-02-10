@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lego_express/configuration/configuration.dart';
 import 'package:lego_express/domain/domain.dart';
+import 'package:lego_express/presentation/presentation.dart';
 
 /// Widget Item productos.
 class ShoppingProductItemWidget extends StatelessWidget {
@@ -11,6 +13,7 @@ class ShoppingProductItemWidget extends StatelessWidget {
     required this.borderRadiusValue,
     required this.productEntity,
     required this.colorIconButton,
+    required this.event,
   });
 
   // Alto de la vista.
@@ -25,6 +28,8 @@ class ShoppingProductItemWidget extends StatelessWidget {
   final ProductEntity productEntity;
   // Color del icono del botón.
   final Color colorIconButton;
+  // Evento del boton
+  final Function() event;
 
   @override
   Widget build(BuildContext context) {
@@ -47,83 +52,136 @@ class ShoppingProductItemWidget extends StatelessWidget {
         decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: BorderRadius.all(Radius.circular(borderRadiusValue))),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            // Unidades disponibles
-            Container(
-                alignment: Alignment.centerRight,
-                width: widthItem * 0.8,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Stock: ',
-                      style: TextStyle(fontSize: heightItem * 0.07),
-                    ),
-                    Text(
-                      productEntity.stock.toString(),
-                      style: TextStyle(
-                          fontSize: heightItem * 0.07,
-                          fontWeight: FontWeight.w800),
-                    )
-                  ],
-                )),
-            // Imagen
-            Container(
-              alignment: Alignment.center,
-              color: Colors.yellow.withValues(alpha: 0),
-              width: widthItem * 0.5,
-              height: widthItem * 0.5,
-              child: Image.network(
-                productEntity.pathNetworkImage,
-                fit: BoxFit.contain,
+            // Data e información del item
+            _dataItem(widthItem, heightItem),
+            // Eevento para ir al detalle de producto
+            Positioned(
+              top: 0,
+              child: SizedBox(
+                height: heightItem * 0.5,
+                width: widthItem,
+                child: GestureDetector(
+                  onTap: () {
+                    uiEventItemDetailHelper(context, productEntity);
+                  },
+                ),
               ),
             ),
-            // Titulo y Precio
-            Container(
-                width: widthItem,
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(left: widthItem * 0.07),
-                color: Colors.red.withValues(alpha: 0),
-                child: Column(
-                  children: [
-                    // Titulo o nombre
-                    Text(
-                      productEntity.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: heightItem * 0.065,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    // Precio
-                    Text(
-                      '\$${productEntity.price}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: heightItem * 0.07,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    // Botón carrito
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(heightItem * 0.05),
-                      ),
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.shopping_cart,
-                        size: heightItem * 0.1,
-                        color: colorIconButton,
-                      ),
-                    ),
-                  ],
-                )),
+            // Número de productos en el carrito, mostrar si es mayor a 0
+            Visibility(
+              visible: productEntity.unitCartList > 0,
+              child: Positioned(
+                  bottom: widthItem * 0.05,
+                  right: heightItem * 0.06,
+                  child: Text(
+                    productEntity.unitCartList.toString(),
+                    style: TextStyle(
+                        color: AppColors(context: context).third,
+                        fontSize: heightItem * 0.08),
+                  )),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Column _dataItem(double widthItem, double heightItem) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Unidades disponibles
+        Container(
+            alignment: Alignment.centerRight,
+            width: widthItem * 0.8,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Stock: ',
+                  style: TextStyle(fontSize: heightItem * 0.07),
+                ),
+                Text(
+                  productEntity.stock.toString(),
+                  style: TextStyle(
+                      fontSize: heightItem * 0.07, fontWeight: FontWeight.w800),
+                )
+              ],
+            )),
+        // Imagen
+        Container(
+          alignment: Alignment.center,
+          color: Colors.yellow.withValues(alpha: 0),
+          width: widthItem * 0.5,
+          height: widthItem * 0.5,
+          child: _imageLoading(),
+        ),
+        // Titulo y Precio
+        Container(
+            width: widthItem,
+            alignment: Alignment.center,
+            padding: EdgeInsets.only(left: widthItem * 0.07),
+            color: Colors.red.withValues(alpha: 0),
+            child: Column(
+              children: [
+                // Titulo o nombre
+                Text(
+                  productEntity.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontSize: heightItem * 0.065,
+                      fontWeight: FontWeight.w700),
+                ),
+                // Precio
+                Text(
+                  '\$${productEntity.price}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontSize: heightItem * 0.07, fontWeight: FontWeight.w500),
+                ),
+                // Botón carrito
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: CircleBorder(),
+                    padding: EdgeInsets.all(heightItem * 0.05),
+                  ),
+                  onPressed: () {
+                    event();
+                  },
+                  child: Icon(
+                    Icons.shopping_cart,
+                    size: heightItem * 0.1,
+                    color: colorIconButton,
+                  ),
+                ),
+              ],
+            )),
+      ],
+    );
+  }
+
+  /// Barra de carga e imagen cargada.
+  Widget _imageLoading() {
+    return Image.network(
+      productEntity.pathNetworkImage,
+      fit: BoxFit.contain,
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
+        if (loadingProgress == null) {
+          // La imagen ya se ha cargado, se muestra el widget final.
+          return child;
+        } else {
+          // La imagen se está cargando.
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }

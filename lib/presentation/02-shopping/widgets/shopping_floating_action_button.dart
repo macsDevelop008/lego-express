@@ -18,6 +18,7 @@ class ShoppingFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: 'unic-3',
       onPressed: () {
         event();
       },

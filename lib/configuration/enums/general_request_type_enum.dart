@@ -1,0 +1,1 @@
+enum GeneralRequestType { error, success }

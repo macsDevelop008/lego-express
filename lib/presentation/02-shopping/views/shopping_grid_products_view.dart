@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:lego_express/domain/domain.dart';
+import 'package:lego_express/configuration/configuration.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
-class ShoppingGridProductsView extends StatelessWidget {
+class ShoppingGridProductsView extends ConsumerWidget {
   const ShoppingGridProductsView(
       {super.key,
       required this.height,
@@ -18,49 +19,10 @@ class ShoppingGridProductsView extends StatelessWidget {
   final ThemeData appTheme;
 
   @override
-  Widget build(BuildContext context) {
-    final testList = [
-      ProductEntity(
-          pathNetworkImage:
-              'https://cdn.merlinsbricks.com/images/LEGO-76920/LEGO-76920-1.webp?v=2',
-          title: 'Llavero de Nueva York',
-          price: 250,
-          description:
-              '¡Los fans de la Gran Manzana van a adorar el Llavero de Nueva York LEGO® Iconic (854032)! Cuenta con una minifigura ataviada con una gorra de béisbol y una camiseta con las palabras “New York” impresas, unida a una resistente anilla con una cadena metálica. Una manera perfecta de tener las llaves a mano y localizadas, o de añadir un llamativo toque de estilo neoyorquino a una mochila, una fiambrera o lo que se te ocurra.',
-          stock: 1),
-      ProductEntity(
-          pathNetworkImage:
-              'https://cdn.merlinsbricks.com/images/LEGO-76920/LEGO-76920-1.webp?v=2',
-          title: 'Carro Test 1',
-          price: 9,
-          description:
-              '¡Los fans de la Gran Manzana van a adorar el Llavero de Nueva York LEGO® Iconic (854032)! Cuenta con una minifigura ataviada con una gorra de béisbol y una camiseta con las palabras “New York” impresas, unida a una resistente anilla con una cadena metálica. Una manera perfecta de tener las llaves a mano y localizadas, o de añadir un llamativo toque de estilo neoyorquino a una mochila, una fiambrera o lo que se te ocurra.',
-          stock: 3),
-      ProductEntity(
-          pathNetworkImage:
-              'https://cdn.merlinsbricks.com/images/LEGO-76920/LEGO-76920-1.webp?v=2',
-          title: 'Carro Test 1',
-          price: 250,
-          description:
-              '¡Los fans de la Gran Manzana van a adorar el Llavero de Nueva York LEGO® Iconic (854032)! Cuenta con una minifigura ataviada con una gorra de béisbol y una camiseta con las palabras “New York” impresas, unida a una resistente anilla con una cadena metálica. Una manera perfecta de tener las llaves a mano y localizadas, o de añadir un llamativo toque de estilo neoyorquino a una mochila, una fiambrera o lo que se te ocurra.',
-          stock: 6),
-      ProductEntity(
-          pathNetworkImage:
-              'https://cdn.merlinsbricks.com/images/LEGO-76920/LEGO-76920-1.webp?v=2',
-          title: 'Carro Test 1',
-          price: 250,
-          description:
-              '¡Los fans de la Gran Manzana van a adorar el Llavero de Nueva York LEGO® Iconic (854032)! Cuenta con una minifigura ataviada con una gorra de béisbol y una camiseta con las palabras “New York” impresas, unida a una resistente anilla con una cadena metálica. Una manera perfecta de tener las llaves a mano y localizadas, o de añadir un llamativo toque de estilo neoyorquino a una mochila, una fiambrera o lo que se te ocurra.',
-          stock: 2),
-      ProductEntity(
-          pathNetworkImage:
-              'https://cdn.merlinsbricks.com/images/LEGO-76920/LEGO-76920-1.webp?v=2',
-          title: 'Carro Test 1',
-          price: 4,
-          description:
-              '¡Los fans de la Gran Manzana van a adorar el Llavero de Nueva York LEGO® Iconic (854032)! Cuenta con una minifigura ataviada con una gorra de béisbol y una camiseta con las palabras “New York” impresas, unida a una resistente anilla con una cadena metálica. Una manera perfecta de tener las llaves a mano y localizadas, o de añadir un llamativo toque de estilo neoyorquino a una mochila, una fiambrera o lo que se te ocurra.',
-          stock: 1),
-    ];
+  Widget build(BuildContext context, WidgetRef ref) {
+    // listado de productos según el provider
+    final productsList = ref.watch(listAllProductsProvider);
+
     return Container(
       alignment: Alignment.center,
       color: Colors.orange.withValues(alpha: 0.0),
@@ -79,7 +41,7 @@ class ShoppingGridProductsView extends StatelessWidget {
             crossAxisCount: 2, // 2 columnas
             mainAxisSpacing: 0, // Espacio vertical entre ítems
             crossAxisSpacing: 0, // Espacio horizontal entre ítems
-            children: List.generate(testList.length, (i) {
+            children: List.generate(productsList.length, (i) {
               final double verticalOffset = _verticalOffset(i);
               return Transform.translate(
                 offset: Offset(0, verticalOffset),
@@ -88,8 +50,11 @@ class ShoppingGridProductsView extends StatelessWidget {
                   widthBase: width * 0.55,
                   backgroundColor: appTheme.primaryColor.withValues(alpha: 0.6),
                   borderRadiusValue: width * 0.05,
-                  productEntity: testList[i],
+                  productEntity: productsList[i],
                   colorIconButton: appTheme.primaryColor,
+                  event: () {
+                    uiEventItemAddToCartListHelper(context, productsList[i]);
+                  },
                 ),
               );
             }),

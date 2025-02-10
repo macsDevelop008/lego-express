@@ -71,14 +71,14 @@ class ShoppingCardProductWidget extends StatelessWidget {
                           fontWeight: FontWeight.w700, fontSize: height * 0.15),
                     ),
                     // Agregar y eliminar unidad de producto
-                    GlobalAddUnitWidget(
-                        maxValue: dataProduct.productEntityInformation.stock,
-                        minValue: 0,
-                        buttonsSize: height * 0.3,
-                        textUnitSize: height * 0.12,
-                        buttonEnabledColor: buttonEnabledColor,
-                        buttonDisabledColor: buttonDisabledColor,
-                        spaceHorizontalBeetwenElemnts: width * 0.025),
+                    /*GlobalAddUnitWidget(
+                      minValue: 0,
+                      buttonsSize: height * 0.3,
+                      textUnitSize: height * 0.12,
+                      buttonEnabledColor: buttonEnabledColor,
+                      buttonDisabledColor: buttonDisabledColor,
+                      spaceHorizontalBeetwenElemnts: width * 0.025, productEntity: ,
+                    ),*/
                   ],
                 ),
               );

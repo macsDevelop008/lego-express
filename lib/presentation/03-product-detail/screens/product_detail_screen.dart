@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lego_express/domain/domain.dart';
 import 'package:lego_express/presentation/presentation.dart';
@@ -86,55 +89,27 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                           Positioned(
                             bottom: 0,
-                            child: Container(
-                              alignment: Alignment.center,
-                              color: Colors.red.withValues(alpha: 0),
-                              height: heightBaseData,
-                              width: widthBaseData,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: widthBaseData * 0.035),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    // Titulo
-                                    ProductDetailTitleView(
-                                      title: widget.productEntity.title,
-                                      size: heightBaseData * 0.07,
-                                    ),
-                                    // Calificación
-                                    ProductDetailExtraInformationView(
-                                      iconCalificationSize:
-                                          heightBaseData * 0.1,
-                                      textCalification: '4.8',
-                                      sizeTextCalification:
-                                          heightBaseData * 0.055,
-                                    ),
-                                    // Descripción
-                                    ProductDetailDescriptionView(
-                                      height: heightBaseData * 0.28,
-                                      width: widthBaseData,
-                                      description:
-                                          widget.productEntity.description,
-                                      descriptionSize: heightBaseData * 0.04,
-                                    ),
-                                    // Precio y agregar cantidad
-                                    ProductDetailPreciAddUnitView(
-                                      height: heightBaseData * 0.25,
-                                      width: widthBaseData,
-                                      currentUnitStock:
-                                          widget.productEntity.stock,
-                                      preci: widget.productEntity.price,
-                                      appTheme: theme,
-                                    ),
-                                    // Botón agregar al carrito
-                                    ProductDetailButtonAddToCartView(
-                                      height: heightBaseData * 0.22,
-                                      width: widthBaseData,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            // Petición del detalle del producto
+                            child: FutureBuilder(
+                              future: uiRequestDetailProductHelper(
+                                  context, widget.productEntity),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  if (Platform.isIOS) {
+                                    return CupertinoActivityIndicator();
+                                  } else {
+                                    return CircularProgressIndicator();
+                                  }
+                                } else {
+                                  return _dataSecondPart(
+                                      heightBaseData,
+                                      widthBaseData,
+                                      theme,
+                                      snapshot.data.toString());
+                                }
+                              },
                             ),
                           )
                         ],
@@ -144,6 +119,55 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ],
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Datos de la segunda parte, dentro del fondo curvo
+  Container _dataSecondPart(double heightBaseData, double widthBaseData,
+      ThemeData theme, String descrition) {
+    return Container(
+      alignment: Alignment.center,
+      color: Colors.red.withValues(alpha: 0),
+      height: heightBaseData,
+      width: widthBaseData,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: widthBaseData * 0.035),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            // Titulo
+            ProductDetailTitleView(
+              title: widget.productEntity.title,
+              size: heightBaseData * 0.07,
+            ),
+            // Calificación
+            ProductDetailExtraInformationView(
+              iconCalificationSize: heightBaseData * 0.1,
+              textCalification: '4.8',
+              sizeTextCalification: heightBaseData * 0.055,
+            ),
+            // Descripción
+            ProductDetailDescriptionView(
+              height: heightBaseData * 0.28,
+              width: widthBaseData,
+              description: descrition,
+              descriptionSize: heightBaseData * 0.04,
+            ),
+            // Precio y agregar cantidad
+            ProductDetailPreciAddUnitView(
+              height: heightBaseData * 0.25,
+              width: widthBaseData,
+              appTheme: theme,
+              productEntity: widget.productEntity,
+            ),
+            // Botón agregar al carrito
+            ProductDetailButtonAddToCartView(
+              height: heightBaseData * 0.22,
+              width: widthBaseData,
+            ),
           ],
         ),
       ),

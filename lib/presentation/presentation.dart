@@ -1,3 +1,15 @@
+export 'package:lego_express/presentation/global/widgets/global_image_network_loading_widget.dart';
+
+export 'package:lego_express/presentation/03-product-detail/helpers/ui_request_detail_product_helper.dart';
+
+export 'package:lego_express/presentation/02-shopping/helpers/ui_event_item_detal_helper.dart';
+
+export 'package:lego_express/presentation/02-shopping/helpers/ui_event_item_add_to_cart_list_helper.dart';
+
+export 'package:lego_express/presentation/02-shopping/helpers/ui_get_all_products_helper.dart';
+
+export 'package:lego_express/infraestructure/helpers/request/dio/request_dio_get_all_products_helper.dart';
+
 export 'package:lego_express/presentation/global/helpers/global_log_out_helper.dart';
 
 export 'package:lego_express/presentation/00-initial/helpers/initial_data_helper.dart';

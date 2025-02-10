@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 
+import '../../../domain/entities/product/product_entity.dart';
+
 /// Widget global que permite agregar y restar unidades con topes.
 class GlobalAddUnitWidget extends StatefulWidget {
-  const GlobalAddUnitWidget(
-      {super.key,
-      required this.maxValue,
-      required this.minValue,
-      required this.buttonsSize,
-      required this.textUnitSize,
-      required this.buttonEnabledColor,
-      required this.buttonDisabledColor,
-      required this.spaceHorizontalBeetwenElemnts});
+  const GlobalAddUnitWidget({
+    super.key,
+    required this.minValue,
+    required this.buttonsSize,
+    required this.textUnitSize,
+    required this.buttonEnabledColor,
+    required this.buttonDisabledColor,
+    required this.spaceHorizontalBeetwenElemnts,
+    required this.productEntity,
+  });
 
-  // Topes - Max es la cantidad en stock
-  final int maxValue;
+  // Tope minimo
   final int minValue;
-
   // Tamaño botones
   final double buttonsSize;
-  // Colo boton habilitado
+  // Color boton habilitado
   final Color buttonEnabledColor;
-  // Colo boton deshabilitado
+  // Color boton deshabilitado
   final Color buttonDisabledColor;
   // Tamaño texto unidad
   final double textUnitSize;
   // Espacio entre elementos
   final double spaceHorizontalBeetwenElemnts;
+  // Información del producto
+  final ProductEntity productEntity;
 
   @override
   State<GlobalAddUnitWidget> createState() => _GlobalAddUnitWidgetState();
@@ -43,12 +46,15 @@ class _GlobalAddUnitWidgetState extends State<GlobalAddUnitWidget> {
           width: widget.buttonsSize,
           height: widget.buttonsSize,
           child: FloatingActionButton(
-            onPressed: () {},
+            heroTag: 'unic-2',
+            onPressed: _activeSubtractButton() ? () {} : null,
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.buttonsSize * 0.2),
             ),
-            backgroundColor: widget.buttonEnabledColor,
+            backgroundColor: _activeSubtractButton()
+                ? widget.buttonEnabledColor
+                : widget.buttonDisabledColor,
             child: Icon(
               Icons.remove,
               size: widget.buttonsSize * 0.5,
@@ -57,7 +63,7 @@ class _GlobalAddUnitWidgetState extends State<GlobalAddUnitWidget> {
         ),
         // Número unidad
         Text(
-          '99',
+          '${widget.productEntity.unitCartList}',
           style: TextStyle(
               fontWeight: FontWeight.w300, fontSize: widget.textUnitSize),
         ),
@@ -66,12 +72,15 @@ class _GlobalAddUnitWidgetState extends State<GlobalAddUnitWidget> {
           width: widget.buttonsSize,
           height: widget.buttonsSize,
           child: FloatingActionButton(
-            onPressed: () {},
+            heroTag: 'unic-1',
+            onPressed: _activeAddButton() ? () {} : null,
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.buttonsSize * 0.2),
             ),
-            backgroundColor: widget.buttonDisabledColor,
+            backgroundColor: _activeAddButton()
+                ? widget.buttonEnabledColor
+                : widget.buttonDisabledColor,
             child: Icon(
               Icons.add,
               size: widget.buttonsSize * 0.5,
@@ -80,5 +89,15 @@ class _GlobalAddUnitWidgetState extends State<GlobalAddUnitWidget> {
         ),
       ],
     );
+  }
+
+  bool _activeSubtractButton() {
+    return widget.productEntity.stock > 0 &&
+        widget.productEntity.unitCartList > 1;
+  }
+
+  bool _activeAddButton() {
+    return widget.productEntity.stock > 0 &&
+        widget.productEntity.unitCartList < widget.productEntity.stock;
   }
 }
