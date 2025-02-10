@@ -1,3 +1,5 @@
+export 'package:lego_express/infraestructure/helpers/request/dio/request_dio_buy_products_helper.dart';
+
 export 'package:lego_express/infraestructure/driven-adapter/request/datasources/request_test_datasource_impl.dart';
 
 export 'package:lego_express/infraestructure/helpers/request/dio/request_dio_get_detail_product_helper.dart';

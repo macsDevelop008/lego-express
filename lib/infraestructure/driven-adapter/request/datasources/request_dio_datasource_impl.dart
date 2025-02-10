@@ -7,14 +7,16 @@ class RequestDioDatasourceImpl implements RequestDatasource {
   // EndPoint todos los productos
   final String endPointGetAllProducts = '/all-products';
   final String endPointSearchProducts = '/detail';
+  final String endPointBuyProducts = '/buy';
 
   @override
   Future<(GeneralRequestType, List<ProductEntity>?)> buyProdycts() async {
-    try {} catch (e) {
+    try {
+      return await buyProdyctsHelper(endPointBuyProducts);
+    } catch (e) {
       Logger().e('Error en la peticion para comprar productos: $e');
+      return (GeneralRequestType.error, null);
     }
-    // TODO: implement buyProdycts
-    throw UnimplementedError();
   }
 
   @override

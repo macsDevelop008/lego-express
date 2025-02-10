@@ -1,5 +1,5 @@
 class TestValues {
-  static bool useTestAllProducts = true;
-  static bool useTestProductDetail = true;
-  static bool useTestBuyProducts = true;
+  static bool useTestAllProducts = false;
+  static bool useTestProductDetail = false;
+  static bool useTestBuyProducts = false;
 }
