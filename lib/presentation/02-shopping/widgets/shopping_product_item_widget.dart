@@ -117,7 +117,9 @@ class ShoppingProductItemWidget extends StatelessWidget {
           color: Colors.yellow.withValues(alpha: 0),
           width: widthItem * 0.5,
           height: widthItem * 0.5,
-          child: _imageLoading(),
+          child: GlobalImageNetworkLoadingWidget(
+            url: productEntity.pathNetworkImage,
+          ),
         ),
         // Titulo y Precio
         Container(
@@ -162,26 +164,6 @@ class ShoppingProductItemWidget extends StatelessWidget {
               ],
             )),
       ],
-    );
-  }
-
-  /// Barra de carga e imagen cargada.
-  Widget _imageLoading() {
-    return Image.network(
-      productEntity.pathNetworkImage,
-      fit: BoxFit.contain,
-      loadingBuilder: (BuildContext context, Widget child,
-          ImageChunkEvent? loadingProgress) {
-        if (loadingProgress == null) {
-          // La imagen ya se ha cargado, se muestra el widget final.
-          return child;
-        } else {
-          // La imagen se está cargando.
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
     );
   }
 }

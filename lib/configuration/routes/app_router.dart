@@ -5,7 +5,7 @@ import 'package:lego_express/presentation/presentation.dart';
 /// Router de la aplicación.
 final appRouter = GoRouter(
     // ruta inicial.
-    initialLocation: ShoppingScreen.route,
+    initialLocation: ShoppingCartScreen.route,
     routes: [
       // Ruta de la pantalla inicial.
       GoRoute(

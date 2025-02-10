@@ -36,76 +36,82 @@ class _LogInScreenState extends State<LogInScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      body: SizedBox(
-          height: height,
-          width: width,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // Fondo de la pantalla.
-              GlobalBackgroundBlurredColorView(
-                height: height,
-                width: width,
-              ),
-
-              // Scroll para los TextField.
-              SingleChildScrollView(
-                physics: ClampingScrollPhysics(),
-                child: SizedBox(
+      body: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (d, r) {
+          debugPrint('Botón nativo capturado.');
+        },
+        child: SizedBox(
+            height: height,
+            width: width,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Fondo de la pantalla.
+                GlobalBackgroundBlurredColorView(
                   height: height,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      // Animación de compra.
-                      GlobalShoppingAnimationView(
-                        size: width * 0.6,
-                      ),
-                      // Eslogan y título de la app.
-                      LogInTitleSloganView(
-                        titleSize: width * 0.1,
-                        sloganSize: width * 0.04,
-                        height: height * 0.15,
-                        width: width * 0.9,
-                      ),
-                      // Formulario para inicio de sesión. Inputs y Botones.
-                      LogInFormButtonsView(
-                        height: height * 0.45,
-                        width: width,
-                        appTheme: theme,
-                      ),
-                    ],
+                  width: width,
+                ),
+
+                // Scroll para los TextField.
+                SingleChildScrollView(
+                  physics: ClampingScrollPhysics(),
+                  child: SizedBox(
+                    height: height,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        // Animación de compra.
+                        GlobalShoppingAnimationView(
+                          size: width * 0.6,
+                        ),
+                        // Eslogan y título de la app.
+                        LogInTitleSloganView(
+                          titleSize: width * 0.1,
+                          sloganSize: width * 0.04,
+                          height: height * 0.15,
+                          width: width * 0.9,
+                        ),
+                        // Formulario para inicio de sesión. Inputs y Botones.
+                        LogInFormButtonsView(
+                          height: height * 0.45,
+                          width: width,
+                          appTheme: theme,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              // Switch para cambiar de tema.
-              Positioned(
-                top: height * 0.07,
-                right: width * 0.05,
-                child: Consumer(
-                  builder:
-                      (BuildContext context, WidgetRef ref, Widget? child) {
-                    final themeProvider = ref.watch(appThemeProvider);
+                // Switch para cambiar de tema.
+                Positioned(
+                  top: height * 0.07,
+                  right: width * 0.05,
+                  child: Consumer(
+                    builder:
+                        (BuildContext context, WidgetRef ref, Widget? child) {
+                      final themeProvider = ref.watch(appThemeProvider);
 
-                    return GlobalThemeSwitchWidget(
-                      isDarkMode: themeProvider == appThemeDark,
-                      onChanged: (bool value) {
-                        // Actulizar provider
-                        var provider = ref.watch(appThemeProvider.notifier);
-                        // Tema Light seleccionado
-                        if (!value) {
-                          provider.state = appThemeLight;
-                        }
-                        // Tema oscuro seleccionado
-                        else {
-                          provider.state = appThemeDark;
-                        }
-                      },
-                    );
-                  },
+                      return GlobalThemeSwitchWidget(
+                        isDarkMode: themeProvider == appThemeDark,
+                        onChanged: (bool value) {
+                          // Actulizar provider
+                          var provider = ref.watch(appThemeProvider.notifier);
+                          // Tema Light seleccionado
+                          if (!value) {
+                            provider.state = appThemeLight;
+                          }
+                          // Tema oscuro seleccionado
+                          else {
+                            provider.state = appThemeDark;
+                          }
+                        },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            )),
+      ),
     );
   }
 }

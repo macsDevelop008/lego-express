@@ -1,3 +1,7 @@
+export 'package:lego_express/configuration/constants/test_values.dart';
+
+export 'package:lego_express/configuration/providers/riverpod/detail_product_num_to_shopping_cart_provider.dart';
+
 export 'package:lego_express/configuration/providers/riverpod/list_all_products_provider.dart';
 
 export 'package:lego_express/configuration/enums/general_request_type_enum.dart';

@@ -47,79 +47,97 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         leadingPaddingLeft: width * 0.01,
         appTheme: theme,
       ),
-      body: SizedBox(
-        height: height,
-        width: width,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Fondo de la pantalla.
-            GlobalBackgroundBlurredColorView(
-              height: height,
-              width: width,
-            ),
-            SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  // Imagen del producto.
-                  GlobalNetworkImageWidget(
-                    size: height * 0.3,
-                    urlImage: widget.productEntity.pathNetworkImage,
-                  ),
-                  Expanded(child: LayoutBuilder(
-                    builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                      // Dimensiones para el base curva.
-                      final widthBase = constraints.maxWidth;
-                      final heightBase = constraints.maxHeight;
-
-                      // Dimensiones para los elementos.
-                      final widthBaseData = widthBase;
-                      final heightBaseData = heightBase * 0.8;
-                      return // Base Curva.
-                          Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          GlobalBaseCurveCustomWidget(
-                            heightBase: heightBase,
-                            widthBase: widthBase,
-                            colorBase:
-                                theme.primaryColor.withValues(alpha: 0.75),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            // Petición del detalle del producto
-                            child: FutureBuilder(
-                              future: uiRequestDetailProductHelper(
-                                  context, widget.productEntity),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  if (Platform.isIOS) {
-                                    return CupertinoActivityIndicator();
-                                  } else {
-                                    return CircularProgressIndicator();
-                                  }
-                                } else {
-                                  return _dataSecondPart(
-                                      heightBaseData,
-                                      widthBaseData,
-                                      theme,
-                                      snapshot.data.toString());
-                                }
-                              },
-                            ),
-                          )
-                        ],
-                      );
-                    },
-                  ))
-                ],
+      body: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (d, r) {
+          debugPrint('Botón nativo capturado.');
+        },
+        child: SizedBox(
+          height: height,
+          width: width,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Fondo de la pantalla.
+              GlobalBackgroundBlurredColorView(
+                height: height,
+                width: width,
               ),
-            )
-          ],
+              SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Imagen del producto.
+                    SizedBox(
+                      height: height * 0.3,
+                      width: height * 0.3,
+                      child: GlobalImageNetworkLoadingWidget(
+                        url: widget.productEntity.pathNetworkImage,
+                      ),
+                    ),
+                    /*GlobalNetworkImageWidget(
+                      size: height * 0.3,
+                      urlImage: widget.productEntity.pathNetworkImage,
+                    ),*/
+                    Expanded(child: LayoutBuilder(
+                      builder:
+                          (BuildContext context, BoxConstraints constraints) {
+                        // Dimensiones para el base curva.
+                        final widthBase = constraints.maxWidth;
+                        final heightBase = constraints.maxHeight;
+
+                        // Dimensiones para los elementos.
+                        final widthBaseData = widthBase;
+                        final heightBaseData = heightBase * 0.8;
+                        return // Base Curva.
+                            Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            GlobalBaseCurveCustomWidget(
+                              heightBase: heightBase,
+                              widthBase: widthBase,
+                              colorBase:
+                                  theme.primaryColor.withValues(alpha: 0.75),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              // Petición del detalle del producto
+                              child: FutureBuilder(
+                                future: uiRequestDetailProductHelper(
+                                    context, widget.productEntity),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    if (Platform.isIOS) {
+                                      return CupertinoActivityIndicator(
+                                        radius: heightBaseData * 0.13,
+                                      );
+                                    } else {
+                                      return SizedBox(
+                                          width: heightBaseData * 0.13,
+                                          height: heightBaseData * 0.13,
+                                          child: CircularProgressIndicator());
+                                    }
+                                  } else {
+                                    return _dataSecondPart(
+                                        heightBaseData,
+                                        widthBaseData,
+                                        theme,
+                                        snapshot.data.toString());
+                                  }
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                    ))
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -167,6 +185,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ProductDetailButtonAddToCartView(
               height: heightBaseData * 0.22,
               width: widthBaseData,
+              productEntity: widget.productEntity,
             ),
           ],
         ),

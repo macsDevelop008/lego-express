@@ -15,7 +15,9 @@ Future uiGetAllProductsHelper(BuildContext context) async {
   if (ref.read(listAllProductsProvider).isNotEmpty) return;
 
   // Fuente de información
-  final datasource = RequestDioDatasourceImpl();
+  final datasource = (TestValues.useTestAllProducts)
+      ? RequestTestDatasourceImpl()
+      : RequestDioDatasourceImpl();
   final repository = RequestRepositoryImpl(datasource: datasource);
 
   // Consulta

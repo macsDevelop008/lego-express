@@ -36,33 +36,39 @@ class _InitialScreenState extends State<InitialScreen> {
     final appColors = AppColors(context: context);
 
     return Scaffold(
-      body: SizedBox(
-        height: height,
-        width: width,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Fondo de la pantalla.
-            GlobalBackgroundBlurredColorView(
-              height: height,
-              width: width,
-            ),
-            // Animación de compra.
-            GlobalShoppingAnimationView(
-              size: width * 0.8,
-            ),
-            // Indicador de carga en area segura.
-            Positioned(
-                bottom: height * 0.015,
-                right: width * 0.05,
-                child: SafeArea(
-                    child: InitialFooterLoadingAnimationView(
-                  sizeAnimation: width * 0.15,
-                  color: appColors.fifth,
-                  textSize: width * 0.05,
-                  spaceSize: width * 0.05,
-                ))),
-          ],
+      body: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (d, r) {
+          debugPrint('Botón nativo capturado.');
+        },
+        child: SizedBox(
+          height: height,
+          width: width,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Fondo de la pantalla.
+              GlobalBackgroundBlurredColorView(
+                height: height,
+                width: width,
+              ),
+              // Animación de compra.
+              GlobalShoppingAnimationView(
+                size: width * 0.8,
+              ),
+              // Indicador de carga en area segura.
+              Positioned(
+                  bottom: height * 0.015,
+                  right: width * 0.05,
+                  child: SafeArea(
+                      child: InitialFooterLoadingAnimationView(
+                    sizeAnimation: width * 0.15,
+                    color: appColors.fifth,
+                    textSize: width * 0.05,
+                    spaceSize: width * 0.05,
+                  ))),
+            ],
+          ),
         ),
       ),
     );

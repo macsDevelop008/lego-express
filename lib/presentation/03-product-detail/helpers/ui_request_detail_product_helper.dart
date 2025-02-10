@@ -9,7 +9,9 @@ import 'package:lego_express/presentation/presentation.dart';
 Future<String> uiRequestDetailProductHelper(
     BuildContext context, ProductEntity productEntity) async {
   // Fuente de información
-  final datasource = RequestDioDatasourceImpl();
+  final datasource = (TestValues.useTestProductDetail)
+      ? RequestTestDatasourceImpl()
+      : RequestDioDatasourceImpl();
   final repository = RequestRepositoryImpl(datasource: datasource);
 
   // Consulta

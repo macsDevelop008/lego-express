@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lego_express/configuration/configuration.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
@@ -20,7 +21,7 @@ class ShoppingCartAppBarView extends StatelessWidget
       leading: ShoppingCartLeadingWidget(
         paddingLeft: leadingPaddingLeft,
         event: () {
-          print('atras');
+          context.go(ShoppingScreen.route);
         },
         color: AppColors(context: context).sixth,
       ),

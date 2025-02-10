@@ -23,3 +23,6 @@ https://flutter.dev/to/ios-deploy
 
 ios/Podfile
 platform :ios, '13.0'
+
+macs contra123
+dist 321contra

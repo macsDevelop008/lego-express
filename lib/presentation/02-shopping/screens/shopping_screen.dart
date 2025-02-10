@@ -47,48 +47,56 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
       ),
       // Botón Global
       floatingActionButton: ShoppingFloatingActionButton(
-        event: () {},
+        event: () {
+          uiEventFloatingActionButtonHelper(context);
+        },
         icon: Icons.shopping_cart_checkout_rounded,
         iconColor: theme.primaryColor,
       ),
-      body: SizedBox(
-        height: height,
-        width: width,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Fondo de la pantalla.
-            GlobalBackgroundBlurredColorView(
-              height: height,
-              width: width,
-            ),
-            FutureBuilder(
-              future: uiGetAllProductsHelper(context),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                // Cargando información.
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  if (Platform.isIOS) {
-                    return CupertinoActivityIndicator();
+      body: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (d, r) {
+          debugPrint('Botón nativo capturado.');
+        },
+        child: SizedBox(
+          height: height,
+          width: width,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Fondo de la pantalla.
+              GlobalBackgroundBlurredColorView(
+                height: height,
+                width: width,
+              ),
+              FutureBuilder(
+                future: uiGetAllProductsHelper(context),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  // Cargando información.
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    if (Platform.isIOS) {
+                      return CupertinoActivityIndicator();
+                    } else {
+                      return CircularProgressIndicator();
+                    }
                   } else {
-                    return CircularProgressIndicator();
+                    return
+                        // Scroll para los TextField.
+                        SingleChildScrollView(
+                            physics: ClampingScrollPhysics(),
+                            child: SizedBox(
+                              height: height,
+                              child:
+                                  // Area segura para evitar el dibujado por debajo del appBar.
+                                  SafeArea(
+                                child: _allData(theme),
+                              ),
+                            ));
                   }
-                } else {
-                  return
-                      // Scroll para los TextField.
-                      SingleChildScrollView(
-                          physics: ClampingScrollPhysics(),
-                          child: SizedBox(
-                            height: height,
-                            child:
-                                // Area segura para evitar el dibujado por debajo del appBar.
-                                SafeArea(
-                              child: _allData(theme),
-                            ),
-                          ));
-                }
-              },
-            ),
-          ],
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

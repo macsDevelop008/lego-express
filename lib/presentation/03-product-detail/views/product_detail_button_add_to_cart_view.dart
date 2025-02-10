@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:lego_express/domain/domain.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
 class ProductDetailButtonAddToCartView extends StatelessWidget {
   const ProductDetailButtonAddToCartView(
-      {super.key, required this.height, required this.width});
+      {super.key,
+      required this.height,
+      required this.width,
+      required this.productEntity});
 
   // Espacio a ocupar por la descripción
   final double height;
   final double width;
+  final ProductEntity productEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +24,12 @@ class ProductDetailButtonAddToCartView extends StatelessWidget {
       child: GlobalButtonTextWidget(
           width: width,
           height: height * 0.6,
-          text: 'Agregar al Carrito',
+          text: 'Actualizar el Carrito',
           sizeText: height * 0.2,
           roundedBorders: height * 0.2,
-          event: () {}),
+          event: () {
+            globalEventButtonAddUnitHelper(context, productEntity);
+          }),
     );
   }
 }

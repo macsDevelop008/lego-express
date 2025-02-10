@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lego_express/configuration/configuration.dart';
 import 'package:lego_express/domain/domain.dart';
 import 'package:lego_express/presentation/presentation.dart';
 
@@ -19,7 +21,7 @@ class ShoppingCardProductWidget extends StatelessWidget {
   // Color del fondo
   final Color backgroundColor;
   // Datos del producto
-  final ProductCartEntity dataProduct;
+  final ProductEntity dataProduct;
   // Color btm seleccionado widget agregar y eliminar unidad
   final Color buttonEnabledColor;
   // Color btm deseleccionado widget agregar y eliminar unidad
@@ -41,8 +43,7 @@ class ShoppingCardProductWidget extends StatelessWidget {
         children: [
           // Imagen
           GlobalNetworkImageWidget(
-              size: height,
-              urlImage: dataProduct.productEntityInformation.pathNetworkImage),
+              size: height, urlImage: dataProduct.pathNetworkImage),
           Expanded(child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               final x = constraints.maxWidth;
@@ -59,7 +60,7 @@ class ShoppingCardProductWidget extends StatelessWidget {
                   children: [
                     // Titulo o nombre
                     Text(
-                      dataProduct.productEntityInformation.title,
+                      dataProduct.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.w700),
@@ -70,6 +71,10 @@ class ShoppingCardProductWidget extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.w700, fontSize: height * 0.15),
                     ),
+                    Text(
+                      'Cantidad: ${dataProduct.unitCartList}',
+                      style: TextStyle(fontSize: 18),
+                    ),
                     // Agregar y eliminar unidad de producto
                     /*GlobalAddUnitWidget(
                       minValue: 0,
@@ -77,7 +82,8 @@ class ShoppingCardProductWidget extends StatelessWidget {
                       textUnitSize: height * 0.12,
                       buttonEnabledColor: buttonEnabledColor,
                       buttonDisabledColor: buttonDisabledColor,
-                      spaceHorizontalBeetwenElemnts: width * 0.025, productEntity: ,
+                      spaceHorizontalBeetwenElemnts: width * 0.025,
+                      productEntity: dataProduct,
                     ),*/
                   ],
                 ),
