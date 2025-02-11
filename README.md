@@ -1,4 +1,4 @@
-# Prueba Técnica - SuperLikers
+# Prueba Técnica
 
 Esta prueba técnica ha sido desarrollada utilizando Flutter 3.27.1, asegurando compatibilidad con las últimas mejoras y optimizaciones del framework. El objetivo de esta prueba es demostrar mis habilidades en el desarrollo de aplicaciones móviles mediante Flutter, implementando buenas prácticas, arquitectura escalable y un código limpio y mantenible.
 
